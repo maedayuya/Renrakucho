@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         registrations: 'admins/registrations'
      }
   namespace :admins do
+	resources :admins
 	resources :posts
   end
 

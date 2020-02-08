@@ -1,10 +1,19 @@
 <h1>新規投稿</h1>
-<%= form_for(@post,url:{controller: "admins/posts"}) do |f| %>
 
-<%= f.label :title %>
-<%= f.text_field :title %>
-<%= f.label :body %>
-<%= f.text_field :body %>
-<%= f.submit "投稿" %>
+<%= form_for(@post,url:{controller:"admins/posts"}) do |f| %>
+
+<div class="field">
+  <%= f.label "タイトル" %><br />
+  <%= f.text_field :title, autofocus: true, autocomplete: "title" ,:size => "60"%>
+</div>
+
+<div class="field">
+  <%= f.label "内容" %><br />
+  <%= f.text_area :body, autofocus: true, autocomplete: "body" ,:size => "60x10"%>
+</div>
+
+<div class="actions" style="margin-top: 50px;">
+  <%= f.submit "投稿" %>
+</div>
 
 <% end %>

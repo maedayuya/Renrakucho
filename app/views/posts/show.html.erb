@@ -1,2 +1,17 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1>投稿詳細</h1>
+<p>
+<strong>投稿者</strong>
+<%= @post.admin.name %>先生
+</p>
+
+<p>
+<strong>タイトル</strong>
+<%= @post.title %>
+</p>
+
+<p>
+<strong>内容</strong>
+<%= simple_format(@post.body) %>
+</p>
+
+<%= link_to "投稿一覧へ",posts_path %>
