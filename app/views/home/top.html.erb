@@ -1,5 +1,8 @@
-<h1>Home#top</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+<div class="top-message col-md-offset-3 col-md-6" style="text-align: center;">
 
-<%= link_to "ログイン",new_user_session_path %>
-<%= link_to "新規登録",new_user_registration_path %>
+<h1>連絡帳アプリ</h1>
+<p>保育士と保護者をつなぐためのツールです。</p>
+
+<%= link_to "ログイン",new_user_session_path,class: 'btn btn-info col-xs-10 col-xs-offset-1 sign_in' %>
+<%= link_to "新規登録",new_user_registration_path,class: 'btn btn-success col-xs-10 col-xs-offset-1 sign_in' %>
+</div>
