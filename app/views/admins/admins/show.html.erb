@@ -1,5 +1,7 @@
 <h1>マイページ</h1>
-<p>ようこそ！<%= current_admin.name %>さん</p>
+<p>ようこそ！<%= current_admin.name %>先生</p>
+
+<%= link_to "園児追加",new_admins_child_path %>
 
 <h1>投稿一覧</h1>
 <table class="table table-hover table-inverse">
@@ -20,5 +22,25 @@
 </tbody>
 </table>
 
+<h1>自分のクラス</h1>
 
+<%= link_to "クラスを追加",new_admins_class_name_path %>
+
+<table class="table table-hover table-inverse">
+<thead>
+	<th>クラス名</th>
+	<th>園児名</th>
+</thead>
+<tbody>
+  <% @class_names.each do |class_name| %>
+  <tr>
+	<td><%= class_name.name %></td>
+	<% class_name.children.limit(5).each do |child| %>
+	  <td><%= child.name %></td>
+	<% end %>
+	<td><%= link_to "詳細",admins_class_name_path(class_name.id) %></td>
+  <% end %>
+  </tr>
+</tbody>
+</table>
 

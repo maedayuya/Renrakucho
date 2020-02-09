@@ -15,7 +15,7 @@ class Admins::PostsController < ApplicationController
        redirect_to admins_post_path(@post.id)
   	else
   	  @posts = Post.all
-  	  render :index
+  	  render :new
   	end
   end
 

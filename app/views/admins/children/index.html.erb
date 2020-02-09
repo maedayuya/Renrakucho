@@ -1,0 +1,19 @@
+<h1>園児一覧</h1>
+<table class="table table-hover table-inverse">
+<thead>
+	<th>担任</th>
+	<th>名前</th>
+	<th>特記事項</th>
+</thead>
+<tbody>
+　<% @children.each do |child| %>
+  <tr>
+	<td><%= child.class_name.admin.name %>先生</td>
+	<td><%= child.name %></td>
+	<td><%= child.information %></td>
+	<td><%= link_to "詳細",admins_child_path(child.id) %></td>
+  <% end %>
+  </tr>
+</tbody>
+</table>
+

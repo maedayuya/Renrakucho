@@ -4,6 +4,7 @@ class Admins::AdminsController < ApplicationController
   end
 
   def show
+  	@class_names = ClassName.where(admin_id: current_admin.id)
   end
 
   def edit

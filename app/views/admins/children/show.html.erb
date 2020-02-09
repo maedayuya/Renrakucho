@@ -1,0 +1,29 @@
+<h1>園児詳細</h1>
+<p>
+<strong>クラス名</strong>
+<%= @child.class_name.name %>
+</p>
+
+<p>
+<strong>担任</strong>
+<%= @child.class_name.admin.name %>先生
+</p>
+
+<p>
+<strong>名前</strong>
+<%= @child.name %>
+</p>
+
+<p>
+<strong>保護者名</strong>
+<%= @child.user.name %>
+</p>
+
+<p>
+<strong>特記事項</strong>
+<%= simple_format(@child.information) %>
+</p>
+
+<%= link_to "編集",edit_admins_child_path(@child.id) %>
+
+<%= link_to "園児一覧へ",admins_children_path %>
