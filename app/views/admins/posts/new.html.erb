@@ -1,5 +1,13 @@
 <h1>新規投稿</h1>
 
+<% if @post.errors.any? %>
+<ul>
+  <% @post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
+</ul>
+
 <%= form_for(@post,url:{controller:"admins/posts"}) do |f| %>
 
 <div class="field">

@@ -1,0 +1,31 @@
+<h1>園児追加</h1>
+
+<% if @child.errors.any? %>
+<ul>
+  <% @child.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<%= form_for(@child,url:{controller:"admins/children"}) do |f| %>
+
+<div class="field">
+  <%= f.label "園児名" %><br />
+  <%= f.text_field :name, autofocus: true, autocomplete: "name" ,:size => "60"%>
+</div>
+<div class="field">
+  <%= f.label "保護者" %><br />
+  <%= f.collection_select :user_id, User.all, :id, :name ,:size => "60"%>
+</div>
+
+<div class="field">
+  <%= f.label "特記事項" %><br />
+  <%= f.text_area :information, autofocus: true, autocomplete: "information" ,:size => "60x10"%>
+</div>
+
+<div class="actions" style="margin-top: 50px;">
+  <%= f.submit "投稿" %>
+</div>
+
+<% end %>

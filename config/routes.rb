@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   devise_for :admins , controllers: {
         sessions: 'admins/sessions',
         registrations: 'admins/registrations'
-     }
+    }
   namespace :admins do
-	resources :admins
-	resources :posts
+  	resources :admins
+  	resources :posts
+  	resources :children
+    resources :class_name
   end
 
   get 'home/about'

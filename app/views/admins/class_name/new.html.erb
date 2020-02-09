@@ -1,0 +1,37 @@
+<%= form_for(@class_name,url:{controller:"admins/class_name"}) do |f| %>
+
+<h1>クラス追加</h1>
+<% if @class_name.errors.any? %>
+<ul>
+  <% @class_name.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<div class="field col-xs-3">
+  <%= f.label "クラス名" %>
+  <%= f.text_field :name %>
+  <%= f.label "担任名" %><br>
+  <%= f.collection_select :admin_id, Admin.all, :id, :name %>
+</div>
+
+<div id="children" class="col-xs-9">
+
+  <div id="class_children">
+	<%= f.fields_for :children do |child| %>
+ 	 <%= render 'child_fields', f: child %>
+	<% end %>
+
+	<div id="links">
+  	  <%= link_to_add_association '園児を追加', f, :children %>
+  	</div>
+
+  </div>
+</div>
+
+<div class="col-xs-3" style="margin-top: 50px;">
+  <%= f.submit "クラスを保存する", class: "btn btn-success"%>
+</div>
+
+<% end %>
