@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_id: 
+  child_id: 
+  title: MyString
+  body: MyText
+  image: MyString
+  condition: 1
+
+two:
+  admin_id: 
+  child_id: 
+  title: MyString
+  body: MyText
+  image: MyString
+  condition: 1

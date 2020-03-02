@@ -11,7 +11,7 @@
 	<td><%= post.admin.name %>先生</td>
 	<td><%= post.title %></td>
 	<td><%= post.body.truncate(20) %></td>
-	<td><%= link_to "詳細",post_path(post.id) %></td>
+	<td><%= link_to "詳細",post_path(post.id),class: "btn btn-info" %></td>
   <% end %>
   </tr>
 </tbody>

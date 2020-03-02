@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/e063d8a1a2.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -15,10 +16,10 @@
       <div class="container">
       <nav>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "マイページ",admins_admin_path(current_admin.id) %></li>
-          <li><%= link_to "新規投稿",new_admins_post_path %></li>
-          <li><%= link_to "投稿一覧",admins_posts_path %></li>
-          <li><%= link_to "保育士一覧",admins_admins_path %></li>
+          <li><%= link_to "マイページ",admin_path(current_admin.id) %></li>
+          <li><%= link_to "お知らせ投稿",new_admins_post_path %></li>
+          <li><%= link_to "お知らせ一覧",admins_posts_path %></li>
+          <li><%= link_to "保育士一覧",admins_path %></li>
           <li><%= link_to "園児一覧",admins_children_path %></li>
           <li><%= link_to "クラス一覧",admins_class_name_index_path %></li>
           <li><%= link_to "ログアウト",destroy_admin_session_path,method: :delete %></li>
@@ -38,7 +39,7 @@
         <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li><%= link_to "マイページ",user_path(current_user.id) %></li>
-          <li><%= link_to "投稿一覧",posts_path %></li>
+          <li><%= link_to "お知らせ一覧",posts_path %></li>
           <li><%= link_to "ログアウト",destroy_user_session_path,method: :delete %></li>
         <% else %>
           <li><%= link_to "ログイン",new_user_session_path %></li>

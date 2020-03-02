@@ -11,7 +11,7 @@
 	<td><%= child.class_name.admin.name %>先生</td>
 	<td><%= child.name %></td>
 	<td><%= child.information %></td>
-	<td><%= link_to "詳細",admins_child_path(child.id) %></td>
+	<td><%= link_to "詳細",admins_child_path(child.id),class: "btn btn-default" %></td>
   <% end %>
   </tr>
 </tbody>

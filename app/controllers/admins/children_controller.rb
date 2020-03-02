@@ -5,14 +5,24 @@ class Admins::ChildrenController < ApplicationController
 
   def show
   	@child = Child.find(params[:id])
+    @days = []
+    @conditions = []
+    @child.child_posts.each do |post|
+      @days << post.created_at.strftime("%Y年%m月%d日")
+      @conditions << post.condition
+    end
+    return @days
+    return @conditions
   end
 
   def new
   	@child = Child.new
+    @class_name = ClassName.new
   end
 
   def create
-  	@child = Child.new(child_params)
+    @child = Child.new
+  	@class_name = ClassName.new(child_params)
   	if @child.save
     	redirect_to admins_child_path(@child.id)
 	  else
@@ -35,6 +45,6 @@ class Admins::ChildrenController < ApplicationController
 
   private
   def child_params
-  	params.require(:child).permit(:user_id,:admin_id,:name,:information)
+    params.require(:child).permit(:user_id, :name, :information)
   end
 end

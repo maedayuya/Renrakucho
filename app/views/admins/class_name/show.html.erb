@@ -1,16 +1,32 @@
-<h1>クラス詳細 <%= @class_name.name %></h1>
+<h1>クラス詳細 <%= @class_name.name %>
+<%= link_to "編集", edit_admins_class_name_path(@class_name.id),class: "btn btn-success" %>
+</h1>
+<span style="float:right">
+<% if @count == 0 %>
+<p style="color: green;">お疲れ様でした</p>
+<% else %>
+<p style="color: red;"><%= @count %>件残っています</p>
+<% end %>
+</span>
 <table class="table table-hover table-inverse">
 <thead>
 	<th>園児名</th>
 	<th>保護者名</th>
 	<th></th>
+	<th>本日の投稿</th>
 </thead>
 <tbody>
 　<% @class_name.children.each do |child| %>
   <tr>
 	<td><%= child.name %></td>
 	<td><%= child.user.name %></td>
-	<td><%= link_to "詳細",admins_child_path(child.id) %></td>
+	<td><%= link_to "詳細",admins_child_path(child.id),class: "btn btn-default" %></td>
+	<% if child.child_posts.where("created_at >= ?", Time.zone.now.beginning_of_day).present? %>
+	<td style="color:green">済</td>
+	<% else %>
+	<td style="color:red">未</td>
+	<% end %>
+
   <% end %>
   </tr>
 </tbody>

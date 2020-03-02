@@ -1,0 +1,142 @@
+<h1>投稿編集</h1>
+
+<% if @child_post.errors.any? %>
+<ul>
+  <% @child_post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<%= form_for(@child_post,url:{controller:"admins/child_posts"}) do |f| %>
+<div class="col-xs-6">
+<div class="field">
+  <%= f.label "担任" %><br />
+  <%= @child.class_name.admin.name %>
+  <%= f.hidden_field :admin_id ,:value => @child.class_name.admin_id %>
+</div>
+<div class="field">
+  <%= f.label "園児名" %><br />
+  <%= @child.name %>
+  <%= f.hidden_field :child_id ,:value => @child.id %>
+</div>
+<div class="field">
+  <%= f.label "タイトル" %><br />
+  <%= f.text_field :title, autofocus: true, autocomplete: "title" ,:size => "60"%>
+</div>
+<div class="field">
+  <%= f.label "本文" %><br />
+  <%= f.text_area :body, autofocus: true, autocomplete: "body" ,:size => "60x10"%>
+</div>
+
+<div class="field">
+  <%= f.label "様子" %><br />
+  <%= f.radio_button :condition,4 %>
+  <i class="far fa-laugh-squint"></i>
+  <%= f.radio_button :condition,3 %>
+  <i class="far fa-smile"></i>
+  <%= f.radio_button :condition,2 %>
+  <i class="far fa-meh"></i>
+  <%= f.radio_button :condition,1 %>
+  <i class="far fa-frown"></i>
+  <%= f.radio_button :condition,0 %>
+  <i class="far fa-dizzy"></i>
+</div>
+</div>
+<div class="field col-xs-6">
+  <%= f.label "本日のベストショット！！" %><br />
+      <!-- id "file"で、fileとdivを紐付けクリック時に連動 -->
+      <div id="img_field" style="text-align: center;" onClick="$('#file').click()" >
+ 
+        <!-- // 画像があるときは画像を表示する -->
+        <% if @child_post.image.url.present? %>
+          <%= image_tag(@child_post.image.thumb.url) %>
+        <% else %>
+          <i class="fas fa-image"></i><i class="fas fa-file-upload add"></i>
+        <% end %>
+ 
+      </div>
+    
+    <!-- // id "file"をつけ、「display:none;」で隠す -->
+    <%= f.file_field :image, class: "image", style: "display:none;", id: "file"%>
+</div>
+<div class="actions col-xs-12" style="margin-top: 30px;">
+  <%= f.submit "投稿", class: "btn btn-success" %>
+</div>
+
+<% end %>
+
+<script type="text/javascript">
+  $(function(){
+  $fileField = $('#file')
+ 
+  // 選択された画像を取得し表示
+  $($fileField).on('change', $fileField, function(e) {
+    file = e.target.files[0]
+    reader = new FileReader(),
+    $preview = $("#img_field");
+ 
+    reader.onload = (function(file) {
+      return function(e) {
+        $preview.empty();
+        $preview.append($('<img>').attr({
+          src: e.target.result,
+          width: "100%",
+          class: "preview",
+          title: file.name
+        }));
+      };
+    })(file);
+    reader.readAsDataURL(file);
+  });
+});
+</script>
+<style type="text/css">
+  #img_field {
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 5px 8px;
+  border: solid 1px #EDBC6C;
+  color: #666;
+  position: relative;
+  padding: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 400px;
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: 0.3s ease-out;
+}
+ 
+#img_field i {
+  font-size: 100px;
+  color: #aaa;
+  line-height: 250px;
+  transition: 0.3s ease-out;
+}
+ 
+#img_field i.add {
+  display: none;
+  font-size: 50px;
+  position: absolute;
+  top: -90px;
+  right: 15px;
+}
+ 
+#img_field:hover {
+  background-color: #EDBC6C;
+  transition: 0.3s ease-out;
+  opacity: 0.9;
+}
+ 
+#img_field:hover i {
+  transition: 0.3s ease-out;
+  display: block;
+  color: #fff;
+}
+</style>

@@ -16,7 +16,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
   def after_sign_up_path_for(resource)
-    admins_admin_path(resource)
+    admin_path(resource)
   end
 
   # GET /resource/edit

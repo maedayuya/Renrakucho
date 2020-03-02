@@ -1,3 +1,9 @@
+<p id="notice" style="color: green;">
+		  <% if flash[:notice] %>
+			<%= flash[:notice] %>
+		  <% end %>
+		</p>
+<div class="col-xs-3">
 <h1>園児詳細</h1>
 <p>
 <strong>クラス名</strong>
@@ -24,6 +30,56 @@
 <%= simple_format(@child.information) %>
 </p>
 
-<%= link_to "編集",edit_admins_child_path(@child.id) %>
+<%= link_to "クラス詳細へ",admins_class_name_path(@child.class_name.id),class: "btn btn-primary" %>
 
-<%= link_to "園児一覧へ",admins_children_path %>
+<%= link_to "編集",edit_admins_child_path(@child.id),class: "btn btn-success" %>
+
+</div>
+
+<div class="col-xs-9">
+<h1>投稿一覧<%= link_to "新規投稿",new_admins_child_child_post_path(@child.id),class: "btn btn-success","style" => "float:right;" %></h1>
+<table class="table table-hover table-inverse">
+<thead>
+	<th>日付</th>
+	<th>タイトル</th>
+	<th>内容</th>
+	<th>様子</th>
+</thead>
+<tbody>
+  <% @child.child_posts.reverse_order.each do |post| %>
+  <tr>
+	<td><%= post.created_at.strftime("%Y年%m月%d日") %></td>
+	<td><%= post.title %></td>
+	<td><%= post.body.truncate(20) %></td>
+	<td id="conditon" value="#{post}">
+	<% if post.condition == 4 %>
+	<i class="far fa-laugh-squint"></i>
+	<% elsif post.condition == 3 %>
+	<i class="far fa-smile"></i>
+	<% elsif post.condition == 2 %>
+	<i class="far fa-meh"></i>
+	<% elsif post.condition == 1 %>
+	<i class="far fa-frown"></i>
+	<% else %>
+	<i class="far fa-dizzy"></i>
+	<% end %>
+	</td>
+	<td><%= link_to "詳細",admins_child_child_post_path(@child.id,post.id),class: "btn btn-default" %></td>
+  <% end %>
+  </tr>
+</tbody>
+</table>
+
+<h1>様子の変化</h1>
+	<% @all = [] %>
+	<% @child.child_posts.select(["created_at","condition"]).each do |c| %>
+	<% @child_posts = [] %>
+	<% @child_posts << c.created_at.strftime("%Y年%m月%d日") %>
+	<% @child_posts << c.condition %>
+	<% @all << @child_posts %>
+	<% end %>
+
+<%= line_chart @all,min: 0,max: 4,xtitle: "日付", ytitle: "
+絶不調　  ←  普通　→    絶好調"%>
+
+</div>
