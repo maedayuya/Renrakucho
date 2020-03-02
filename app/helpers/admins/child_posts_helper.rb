@@ -1,0 +1,2 @@
+module Admins::ChildPostsHelper
+end

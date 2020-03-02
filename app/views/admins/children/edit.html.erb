@@ -8,31 +8,35 @@
 <% end %>
 </ul>
 
-<%= form_for(@child,url:{controller:"admins/children"}) do |f| %>
 
-<div class="field">
-  <%= f.label "クラス名" %>
-  <%= f.collection_select :name, ClassName.all, :name, :name %>
-  <%= f.label "担任名" %><br>
-  <%= f.collection_select :admin_id, Admin.all, :id, :name %>
-</div>
+  <div class="field">
+    <strong>クラス名</strong><br />
+    <%= @child.class_name.name %>
+  </div>
 
-<div class="field">
-  <%= f.label "園児名" %><br />
-  <%= f.text_field :name, autofocus: true, autocomplete: "name" ,:size => "60"%>
-</div>
-<div class="field">
-  <%= f.label "保護者" %><br />
-  <%= f.collection_select :user_id, User.all, :id, :name ,:size => "60"%>
-</div>
+  <div class="field">
+    <strong>担任名</strong><br />
+    <%= @child.class_name.admin.name %>
+  </div>
 
-<div class="field">
-  <%= f.label "特記事項" %><br />
-  <%= f.text_area :information, autofocus: true, autocomplete: "information" ,:size => "60x10"%>
-</div>
+<%= form_for(@child,url: admins_child_path(@child.id)) do |c| %>
 
-<div class="actions" style="margin-top: 50px;">
-  <%= f.submit "投稿" %>
-</div>
+      <div class="field">
+        <%= c.label "園児名" %><br />
+        <%= c.text_field :name, autofocus: true, autocomplete: "name" ,:size => "60"%>
+      </div>
+      <div class="field">
+        <%= c.label "保護者" %><br />
+        <%= c.collection_select :user_id, User.all, :id, :name ,:size => "60"%>
+      </div>
+
+      <div class="field">
+        <%= c.label "特記事項" %><br />
+        <%= c.text_area :information, autofocus: true, autocomplete: "information" ,:size => "60x10"%>
+      </div>
+
+  <div style="margin: 50px 0;">
+    <%= c.submit "変更を保存する", class: "btn btn-success"%>
+  </div>
 
 <% end %>

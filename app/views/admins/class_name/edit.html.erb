@@ -1,0 +1,38 @@
+<%= form_for(@class_name,url: admins_class_name_path(@class_name.id)) do |f| %>
+
+<h1>クラス情報編集</h1>
+<% if @class_name.errors.any? %>
+<ul>
+  <% @class_name.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<div class="field col-xs-3">
+  <%= f.label "クラス名" %>
+  <%= f.text_field :name %>
+  <%= f.label "担任名" %><br>
+  <%= f.collection_select :admin_id, Admin.all, :id, :name %>
+</div>
+
+<div id="children" class="col-xs-9">
+
+  <div id="class_children">
+	<%= f.fields_for :children do |child| %>
+ 	 <%= render 'child_fields', f: child %>
+	<% end %>
+
+	<div id="links">
+  	  <%= link_to_add_association '園児を追加', f, :children ,
+      class: "btn btn-info"%>
+  	</div>
+
+  </div>
+</div>
+
+<div class="col-xs-3" style="margin: 50px 0;">
+  <%= f.submit "クラスを更新する", class: "btn btn-success"%>
+</div>
+
+<% end %>

@@ -1,31 +1,42 @@
-<h1>園児追加</h1>
+<%= form_for(@class_name,url:{controller:"admins/class_name"}) do |f| %>
 
-<% if @child.errors.any? %>
+<h1>園児追加</h1>
+<% if @class_name.errors.any? %>
 <ul>
-  <% @child.errors.full_messages.each do |msg| %>
+  <% @class_name.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
   <% end %>
 <% end %>
 </ul>
 
-<%= form_for(@child,url:{controller:"admins/children"}) do |f| %>
-
-<div class="field">
-  <%= f.label "園児名" %><br />
-  <%= f.text_field :name, autofocus: true, autocomplete: "name" ,:size => "60"%>
-</div>
-<div class="field">
-  <%= f.label "保護者" %><br />
-  <%= f.collection_select :user_id, User.all, :id, :name ,:size => "60"%>
-</div>
-
-<div class="field">
-  <%= f.label "特記事項" %><br />
-  <%= f.text_area :information, autofocus: true, autocomplete: "information" ,:size => "60x10"%>
+<div class="field col-xs-3">
+  <div class="field">
+    <%= f.label "クラス名" %><br />
+    <%= f.collection_select :id, ClassName.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label "担任名" %><br>
+    <%= f.collection_select :admin_id, Admin.all, :id, :name %>
+  </div>
 </div>
 
-<div class="actions" style="margin-top: 50px;">
-  <%= f.submit "投稿" %>
+<div id="children" class="col-xs-9">
+
+  <div id="class_children">
+  <%= f.fields_for :children do |child| %>
+   <%= render 'child_fields', f: child %>
+  <% end %>
+
+  <div id="links">
+      <%= link_to_add_association '園児を追加', f, :children ,
+      class: "btn btn-info"%>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-xs-3" style="margin-top: 50px;">
+  <%= f.submit "クラスを保存する", class: "btn btn-success"%>
 </div>
 
 <% end %>

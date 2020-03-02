@@ -1,4 +1,4 @@
-<h1>投稿詳細</h1>
+<h1>お知らせ詳細</h1>
 <p>
 <strong>投稿者</strong>
 <%= @post.admin.name %>先生
@@ -14,4 +14,4 @@
 <%= simple_format(@post.body) %>
 </p>
 
-<%= link_to "投稿一覧へ",admins_posts_path %>
+<%= link_to "投稿一覧へ",admins_posts_path,class: "btn btn-primary" %>

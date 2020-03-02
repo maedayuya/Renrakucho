@@ -1,46 +1,53 @@
-<h1>マイページ</h1>
-<p>ようこそ！<%= current_admin.name %>先生</p>
+<div class="row">
+	<h1>マイページ</h1>
+	<p>ようこそ！<%= current_admin.name %>先生</p>
+</div>
 
-<%= link_to "園児追加",new_admins_child_path %>
 
-<h1>投稿一覧</h1>
-<table class="table table-hover table-inverse">
-<thead>
-	<th>投稿者</th>
-	<th>タイトル</th>
-	<th>内容</th>
-</thead>
-<tbody>
-　<% current_admin.posts.each do |post| %>
-  <tr>
-	<td><%= post.admin.name %>先生</td>
-	<td><%= post.title %></td>
-	<td><%= post.body.truncate(20) %></td>
-	<td><%= link_to "詳細",admins_post_path(post.id) %></td>
-  <% end %>
-  </tr>
-</tbody>
-</table>
+<div class="row">
+	<span style="font-size: 36px;">自分のクラス</span>
+	<span style="float: right">
+		<%= link_to "クラスを追加",new_admins_class_name_path,
+		class: "btn btn-success" %></span>
 
-<h1>自分のクラス</h1>
+	<table class="table table-hover table-inverse">
+	<thead>
+		<th>クラス名</th>
+		<th>園児名</th>
+	</thead>
+	<tbody>
+	  <% @class_names.each do |class_name| %>
+	  <tr>
+		<td><%= class_name.name %></td>
+		<% class_name.children.limit(5).each do |child| %>
+		  <td><%= child.name %></td>
+		<% end %>
+		<td><%= link_to "詳細",admins_class_name_path(class_name.id),class: "btn btn-default" %></td>
+	  <% end %>
+	  </tr>
+	</tbody>
+	</table>
+</div>
 
-<%= link_to "クラスを追加",new_admins_class_name_path %>
+<div class="row">
+	<span style="font-size: 36px;">お知らせ一覧（<%= @current_admin.name %>先生の投稿）</span>
+	<span style="float: right">
+		<%= link_to "新規投稿",new_admins_post_path,
+		class: "btn btn-success" %></span>
 
-<table class="table table-hover table-inverse">
-<thead>
-	<th>クラス名</th>
-	<th>園児名</th>
-</thead>
-<tbody>
-  <% @class_names.each do |class_name| %>
-  <tr>
-	<td><%= class_name.name %></td>
-	<% class_name.children.limit(5).each do |child| %>
-	  <td><%= child.name %></td>
-	<% end %>
-	<td><%= link_to "詳細",admins_class_name_path(class_name.id) %></td>
-  <% end %>
-  </tr>
-</tbody>
-</table>
-
+	<table class="table table-hover table-inverse">
+	<thead>
+		<th>タイトル</th>
+		<th>内容</th>
+	</thead>
+	<tbody>
+	　<% current_admin.posts.each do |post| %>
+	  <tr>
+		<td><%= post.title %></td>
+		<td><%= post.body.truncate(20) %></td>
+		<td><%= link_to "詳細",admins_post_path(post.id),class: "btn btn-default" %></td>
+	  <% end %>
+	  </tr>
+	</tbody>
+	</table>
+</div>

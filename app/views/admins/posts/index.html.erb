@@ -1,4 +1,4 @@
-<h1>投稿一覧</h1>
+<h1>お知らせ一覧</h1>
 <table class="table table-hover table-inverse">
 <thead>
 	<th>投稿者</th>
@@ -11,7 +11,7 @@
 	<td><%= post.admin.name %>先生</td>
 	<td><%= post.title %></td>
 	<td><%= post.body.truncate(20) %></td>
-	<td><%= link_to "詳細",admins_post_path(post.id) %></td>
+	<td><%= link_to "詳細",admins_post_path(post.id),class: "btn btn-default" %></td>
   <% end %>
   </tr>
 </tbody>
