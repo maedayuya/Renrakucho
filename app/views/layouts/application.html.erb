@@ -7,7 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://kit.fontawesome.com/e063d8a1a2.js" crossorigin="anonymous"></script>
+
   </head>
 
   <body>
@@ -33,9 +33,10 @@
       </div>
     </div>
   <% else %>
-    <header class="navbar navbar-fixed-top navbar-inverse">
+    <header class="navbar-fixed-top navbar-inverse" style="background-color: #FFCCCC;">
       <div class="container">
       <nav>
+        <span style="float: left;font-size: 30px;color: gray;">Renrakucho</span>
         <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li><%= link_to "マイページ",user_path(current_user.id) %></li>

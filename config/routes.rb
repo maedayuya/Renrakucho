@@ -7,6 +7,9 @@ Rails.application.routes.draw do
      }
   resources :users ,only:[:show]
   resources :posts ,only:[:index,:show]
+    resources :children do
+      resources :child_posts
+    end
 
   devise_for :admins , controllers: {
         sessions: 'admins/sessions',

@@ -5,14 +5,6 @@ class Admins::ChildrenController < ApplicationController
 
   def show
   	@child = Child.find(params[:id])
-    @days = []
-    @conditions = []
-    @child.child_posts.each do |post|
-      @days << post.created_at.strftime("%Y年%m月%d日")
-      @conditions << post.condition
-    end
-    return @days
-    return @conditions
   end
 
   def new
