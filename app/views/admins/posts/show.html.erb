@@ -1,4 +1,8 @@
-<h1>お知らせ詳細</h1>
+<h1>お知らせ詳細
+  <% if @post.admin == current_admin %>
+    <%= link_to "編集",edit_admins_post_path(@post.id),class: "btn btn-success" %>
+  <% end %>
+</h1>
 <p>
 <strong>投稿者</strong>
 <%= @post.admin.name %>先生
@@ -14,4 +18,8 @@
 <%= simple_format(@post.body) %>
 </p>
 
-<%= link_to "投稿一覧へ",admins_posts_path,class: "btn btn-primary" %>
+<%= link_to "お知らせ一覧へ",admins_posts_path,class: "btn btn-primary" %>
+
+<% if @post.admin == current_admin %>
+  <%= link_to "お知らせを削除する", admins_post_path(@post.id),method: :delete,"data-confirm" => "本当に削除しますか？","style" => "float:right;color:red;margin-top:100px;" %>
+<% end %>

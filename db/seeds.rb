@@ -5,12 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Category.create!(
+  [
+    {name: "園長"},
+    {name: "保育士"},
+    {name: "栄養士"},
+    {name: "看護師"}
+  ]
+)
 Admin.create!(
   [
-    { name: '田中守',email: 't@t',password: 'tttttt' },
-    { name: '前田侑哉',email: 'm@m',password: 'mmmmmm' },
-    { name: '渡辺司',email: 'w@w',password: 'wwwwww' },
-    { name: '久保祐奈',email: 'k@k',password: 'kkkkkk' },
+    { name: '田中守',email: 't@t',password: 'tttttt' , category_id: 1},
+    { name: '前田侑哉',email: 'm@m',password: 'mmmmmm', category_id: 2},
+    { name: '渡辺司',email: 'w@w',password: 'wwwwww' , category_id: 3},
+    { name: '久保祐奈',email: 'k@k',password: 'kkkkkk' , category_id: 4},
   ]
 )
 Post.create!(

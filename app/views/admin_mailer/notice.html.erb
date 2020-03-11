@@ -1,0 +1,45 @@
+<h1><%= @admin.name %>先生</h1>
+
+<p>以下の内容で投稿完了致しました。</p>
+
+<h1>投稿詳細</h1>
+<p>
+<strong>名前</strong>
+<%= @child.name %>
+</p>
+
+<p>
+<strong>保護者名</strong>
+<%= @child.user.name %>
+</p>
+
+<p>
+<strong>特記事項</strong>
+<%= simple_format(@child.information) %>
+</p>
+<p>
+<strong>タイトル</strong><br>
+<%= @child_post.title %>
+</p>
+
+<p>
+<strong>本文</strong>
+<%= simple_format(@child_post.body) %>
+</p>
+
+<p>
+<strong>様子</strong>
+<% if @child_post.condition == 4 %>
+  絶好調！！<br>
+  <% elsif @child_post.condition == 3 %>
+  好調！<br>
+  <% elsif @child_post.condition == 2 %>
+  普通<br>
+  <% elsif @child_post.condition == 1 %>
+  不調<br>
+  <% else %>
+  絶不調<br>
+  <% end %>
+</p>
+<h1>本日のベストショット！！</h1>
+<%= image_tag @child_post.image.thumb.url %>

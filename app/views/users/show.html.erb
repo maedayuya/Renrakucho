@@ -1,8 +1,3 @@
-<p id="notice" style="color: green;">
-  <% if flash[:notice] %>
-	<%= flash[:notice] %>
-  <% end %>
-</p>
 <div class="col-xs-12 col-md-4">
 <h1>マイページ</h1>
 <p>ようこそ！<%= current_user.name %>さん</p>
@@ -29,15 +24,16 @@
 <thead>
 	<th>日付</th>
 	<th>タイトル</th>
-	<th>内容</th>
+	<th class="body">内容</th>
 	<th>様子</th>
+	<th></th>
 </thead>
 <tbody>
   <% @child.child_posts.reverse_order.each do |post| %>
   <tr>
-	<td><%= post.created_at.strftime("%Y年%m月%d日") %></td>
+	<td><%= post.created_at.strftime("%m/%d") %></td>
 	<td><%= post.title %></td>
-	<td><%= post.body.truncate(30) %></td>
+	<td class="body"><%= post.body.truncate(30) %></td>
 	<td id="conditon" value="#{post}">
 	<% if post.condition == 4 %>
 	<i class="far fa-laugh-squint"></i>
@@ -59,9 +55,9 @@
 
 <h1>様子の変化</h1>
 	<% @all = [] %>
-	<% @child.child_posts.select(["created_at","condition"]).each do |c| %>
+	<% @child.child_posts.select(["created_at","condition"]).reverse_order.limit(5).each do |c| %>
 	<% @child_posts = [] %>
-	<% @child_posts << c.created_at.strftime("%Y年%m月%d日") %>
+	<% @child_posts << c.created_at.strftime("%m月%d日") %>
 	<% @child_posts << c.condition %>
 	<% @all << @child_posts %>
 	<% end %>

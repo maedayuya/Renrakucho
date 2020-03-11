@@ -6,5 +6,5 @@ class Admin < ApplicationRecord
   has_many :posts,dependent: :destroy
   has_many :class_names,dependent: :destroy
   has_many :child_posts,dependent: :destroy
-
+  belongs_to :category
 end

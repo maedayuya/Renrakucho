@@ -1,0 +1,31 @@
+<div class="col-md-6">
+<h1>お知らせ編集</h1>
+
+<% if @post.errors.any? %>
+<ul>
+  <% @post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<%= form_for(@post,url: admins_post_path(@post.id)) do |f| %>
+
+<div class="field">
+  <%= f.label "タイトル" %><br />
+  <%= f.text_field :title, autofocus: true, autocomplete: "title" ,:size => "30"%>
+</div>
+
+<div class="field">
+  <%= f.label "内容" %><br />
+  <%= f.text_area :body, autofocus: true, autocomplete: "body" %>
+</div>
+
+<div class="actions" style="margin-top: 30px;">
+  <%= link_to "戻る",admins_post_path(@post.id),class: "btn btn-primary" %>
+
+  <%= f.submit "更新", class: "btn btn-success" ,"style" => "float:right;"%>
+</div>
+
+<% end %>
+</div>

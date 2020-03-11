@@ -1,4 +1,5 @@
 class Admins::ChildrenController < ApplicationController
+  before_action :authenticate_admin!
   def index
   	@children = Child.all
   end
@@ -33,6 +34,11 @@ class Admins::ChildrenController < ApplicationController
     else
       render :edit
     end
+  end
+  def destroy
+    child = Child.find(params[:id])
+    child.destroy
+    redirect_to admins_children_path
   end
 
   private

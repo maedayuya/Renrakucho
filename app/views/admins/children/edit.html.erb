@@ -8,7 +8,7 @@
 <% end %>
 </ul>
 
-
+<div class="col-md-6">
   <div class="field">
     <strong>クラス名</strong><br />
     <%= @child.class_name.name %>
@@ -23,20 +23,23 @@
 
       <div class="field">
         <%= c.label "園児名" %><br />
-        <%= c.text_field :name, autofocus: true, autocomplete: "name" ,:size => "60"%>
+        <%= c.text_field :name, autofocus: true, autocomplete: "name" ,:size => "30"%>
       </div>
       <div class="field">
         <%= c.label "保護者" %><br />
-        <%= c.collection_select :user_id, User.all, :id, :name ,:size => "60"%>
+        <%= c.collection_select :user_id, User.all, :id, :name ,:size => "30"%>
       </div>
 
       <div class="field">
         <%= c.label "特記事項" %><br />
-        <%= c.text_area :information, autofocus: true, autocomplete: "information" ,:size => "60x10"%>
+        <%= c.text_area :information, autofocus: true, autocomplete: "information" %>
       </div>
 
   <div style="margin: 50px 0;">
-    <%= c.submit "変更を保存する", class: "btn btn-success"%>
+    <%= link_to "戻る",admins_child_path(@child.id),class: "btn btn-primary" %>
+    <%= c.submit "変更を保存する", class: "btn btn-success","style" => "float:right;"%>
   </div>
 
 <% end %>
+
+</div>

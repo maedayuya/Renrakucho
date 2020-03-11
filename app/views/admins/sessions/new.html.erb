@@ -1,35 +1,37 @@
-<div class="container">
-  <h1>連絡帳アプリ</h1>
-  <div class="row" style="text-align: center;">
-  <h2>保育士ログイン</h2>
+<div style="text-align: center;">
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+<% end %>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<h2>ログイン</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label "名前" %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" ,:size => "40"%>
+  </div>
+
+  <div class="field">
+    <%= f.label "メールアドレス" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" ,:size => "40"%>
+  </div>
+
+  <div class="field">
+    <%= f.label "パスワード" %><br />
+    <%= f.password_field :password, autocomplete: "current-password",:size => "40" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
     <div class="field">
-      <%= f.label "名前" %><br />
-      <%= f.text_field :name, autofocus: true, autocomplete: "name" ,:size => "60"%>
-    </div>
-
-    <div class="field">
-      <%= f.label "メールアドレス" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,:size => "60"%>
-    </div>
-
-    <div class="field">
-      <%= f.label "パスワード" %><br />
-      <%= f.password_field :password, autocomplete: "current-password",:size => "60" %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label "ログイン状態を保持する" %>
-      </div>
-    <% end %>
-
-    <div class="actions">
-      <%= f.submit "ログイン" %>
+      <%= f.check_box :remember_me %>
+      <%= f.label "ログイン状態を保持する" %>
     </div>
   <% end %>
 
+  <div class="actions">
+    <%= f.submit "ログイン" %>
   </div>
+<% end %>
+
 </div>
+<%= render "admins/shared/links" %>

@@ -1,0 +1,39 @@
+<h1><%= @user.name %>さん</h1>
+
+<p>本日の連絡帳です。</p>
+
+<h1>投稿詳細</h1>
+<p>
+<strong>お子さんのお名前</strong>
+<%= @child.name %>
+</p>
+
+<p>
+<strong>タイトル</strong><br>
+<%= @child_post.title %>
+</p>
+
+<p>
+<strong>本文</strong>
+<%= simple_format(@child_post.body) %>
+</p>
+
+<p>
+<strong>様子</strong>
+<% if @child_post.condition == 4 %>
+  絶好調！！<br>
+  <% elsif @child_post.condition == 3 %>
+  好調！<br>
+  <% elsif @child_post.condition == 2 %>
+  普通<br>
+  <% elsif @child_post.condition == 1 %>
+  不調<br>
+  <% else %>
+  絶不調<br>
+  <% end %>
+</p>
+<h1>本日のベストショット！！</h1>
+<%= image_tag @child_post.image.thumb.url %>
+
+<p>何か気になること等あればこちらまでご連絡ください。</p>
+<%= link_to "#{@admin.email}","mailto:#{@admin.email}" %>

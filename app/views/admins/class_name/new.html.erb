@@ -9,14 +9,19 @@
 <% end %>
 </ul>
 
-<div class="field col-xs-3">
-  <%= f.label "クラス名" %>
-  <%= f.text_field :name %>
-  <%= f.label "担任名" %><br>
-  <%= f.collection_select :admin_id, Admin.all, :id, :name %>
+<div class="col-xs-12 col-md-3" style="margin-bottom: 20px;">
+  <div class="field">
+    <%= f.label "クラス名" %><br>
+    <%= f.text_field :name %><br>
+  </div>
+  <div class="field">
+    <%= f.label "担任名" %><br>
+    <%= current_admin.name %>
+    <%= f.hidden_field :admin_id ,:value => current_admin.id %>
+  </div>
 </div>
 
-<div id="children" class="col-xs-9">
+<div id="children" class="col-xs-12 col-md-9">
 
   <div id="class_children">
 	<%= f.fields_for :children do |child| %>
@@ -31,7 +36,7 @@
   </div>
 </div>
 
-<div class="col-xs-3" style="margin-top: 50px;">
+<div class="col-xs-12" style="margin-top: 50px;">
   <%= f.submit "クラスを保存する", class: "btn btn-success"%>
 </div>
 

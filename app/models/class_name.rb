@@ -8,7 +8,7 @@ class ClassName < ApplicationRecord
 
   def must_have_children
     if children.empty? or children.all? {|child| child.marked_for_destruction? }
-     errors.add(:base, 'Must have at least one child')
+     errors.add(:base, '園児を登録してください')
     end
   end
 end

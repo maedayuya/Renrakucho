@@ -1,4 +1,5 @@
 class Admins::ClassNameController < ApplicationController
+  before_action :authenticate_admin!
   def new
   	@class_name = ClassName.new
   end
@@ -32,7 +33,7 @@ class Admins::ClassNameController < ApplicationController
 
   def update
     @class_name = ClassName.find(params[:id])
-    if @class_name.update(uclass_name_params)
+    if @class_name.update(class_name_params)
       redirect_to admins_class_name_path(@class_name.id)
     else
     render :edit
@@ -40,13 +41,16 @@ class Admins::ClassNameController < ApplicationController
 
   end
 
+  def destroy
+    class_name = ClassName.find(params[:id])
+    class_name.destroy
+    redirect_to admins_class_name_index_path
+  end
+
   private
   def class_name_params
     params.require(:class_name).permit(:name, :admin_id,
     	children_attributes: [:id, :user_id, :name, :information, :_destroy])
   end
-  def uclass_name_params
-    params.require(:class_name).permit(:name, :admin_id,
-      child: [:id, :user_id, :name, :information])
-  end
+
 end

@@ -1,12 +1,16 @@
-<h1>保育士一覧</h1>
+<h1>職員一覧</h1>
 <table class="table table-hover table-inverse">
 <thead>
 	<th>名前</th>
+	<th>カテゴリー</th>
+	<th></th>
 </thead>
 <tbody>
 　<% @admins.each do |admin| %>
   <tr>
-	<td><%= admin.name %>先生</td>
+	<td><%= admin.name %></td>
+	<td><%= admin.category.name %></td>
+	<td><%= link_to "詳細",admin_path(admin.id),class: "btn btn-default" %></td>
   <% end %>
   </tr>
 </tbody>

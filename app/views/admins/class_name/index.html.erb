@@ -7,14 +7,17 @@
 <table class="table table-hover table-inverse">
 <thead>
 	<th>クラス名</th>
-	<th>園児名</th>
+	<th>担任名</th>
+	<th colspan="5" class="body">園児名（５名表示）</th>
+	<th></th>
 </thead>
 <tbody>
   <% @class_names.each do |class_name| %>
   <tr>
 	<td><%= class_name.name %></td>
+	<td><%= class_name.admin.name %></td>
 	<% class_name.children.limit(5).each do |child| %>
-	  <td><%= child.name %></td>
+	  <td class="body"><%= child.name %></td>
 	<% end %>
 	<td><%= link_to "詳細",admins_class_name_path(class_name.id),class: "btn btn-default" %></td>
   <% end %>

@@ -1,53 +1,56 @@
-<div class="row">
-	<h1>マイページ</h1>
-	<p>ようこそ！<%= current_admin.name %>先生</p>
-</div>
+<h1><%= @admin.name %>先生のページ</h1>
+<h3>カテゴリー：<%= @admin.category.name %></h3>
 
-
-<div class="row">
-	<span style="font-size: 36px;">自分のクラス</span>
+<% if @admin.category.name == "保育士" %>
+	<span style="font-size: 2em;">担当しているクラス</span>
+  <% if @admin == current_admin %>
 	<span style="float: right">
 		<%= link_to "クラスを追加",new_admins_class_name_path,
 		class: "btn btn-success" %></span>
+  <% end %>
 
 	<table class="table table-hover table-inverse">
 	<thead>
 		<th>クラス名</th>
-		<th>園児名</th>
+		<th colspan="5" class="body">園児名（５名表示）</th>
+		<th></th>
 	</thead>
 	<tbody>
 	  <% @class_names.each do |class_name| %>
 	  <tr>
 		<td><%= class_name.name %></td>
 		<% class_name.children.limit(5).each do |child| %>
-		  <td><%= child.name %></td>
+		  <td class="body"><%= child.name %></td>
 		<% end %>
 		<td><%= link_to "詳細",admins_class_name_path(class_name.id),class: "btn btn-default" %></td>
 	  <% end %>
 	  </tr>
 	</tbody>
 	</table>
-</div>
 
-<div class="row">
-	<span style="font-size: 36px;">お知らせ一覧（<%= @current_admin.name %>先生の投稿）</span>
-	<span style="float: right">
-		<%= link_to "新規投稿",new_admins_post_path,
-		class: "btn btn-success" %></span>
+<% end %>
 
-	<table class="table table-hover table-inverse">
-	<thead>
-		<th>タイトル</th>
-		<th>内容</th>
-	</thead>
-	<tbody>
-	　<% current_admin.posts.each do |post| %>
-	  <tr>
-		<td><%= post.title %></td>
-		<td><%= post.body.truncate(20) %></td>
-		<td><%= link_to "詳細",admins_post_path(post.id),class: "btn btn-default" %></td>
-	  <% end %>
-	  </tr>
-	</tbody>
-	</table>
-</div>
+<span style="font-size: 2em;">投稿したお知らせ</span>
+
+<% if @admin == current_admin %>
+<span style="float: right">
+	<%= link_to "新規投稿",new_admins_post_path,
+	class: "btn btn-success" %></span>
+<% end %>
+
+<table class="table table-hover table-inverse">
+<thead>
+	<th>タイトル</th>
+	<th class="body">内容</th>
+	<th></th>
+</thead>
+<tbody>
+　<% @admin.posts.each do |post| %>
+  <tr>
+	<td><%= post.title %></td>
+	<td class="body"><%= post.body.truncate(20) %></td>
+	<td><%= link_to "詳細",admins_post_path(post.id),class: "btn btn-default" %></td>
+  <% end %>
+  </tr>
+</tbody>
+</table>

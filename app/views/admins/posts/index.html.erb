@@ -1,9 +1,14 @@
 <h1>お知らせ一覧</h1>
+<span style="float: right">
+		<%= link_to "新規投稿",new_admins_post_path,
+		class: "btn btn-success" %></span>
+
 <table class="table table-hover table-inverse">
 <thead>
 	<th>投稿者</th>
 	<th>タイトル</th>
 	<th>内容</th>
+	<th></th>
 </thead>
 <tbody>
 　<% @posts.each do |post| %>

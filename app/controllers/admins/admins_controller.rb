@@ -1,10 +1,12 @@
 class Admins::AdminsController < ApplicationController
+  before_action :authenticate_admin!
   def index
   	@admins = Admin.all
   end
 
   def show
-  	@class_names = ClassName.where(admin_id: current_admin.id)
+  	@admin = Admin.find(params[:id])
+  	@class_names = ClassName.where(admin_id: @admin.id)
   end
 
   def edit
